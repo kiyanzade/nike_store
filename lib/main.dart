@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nike_store/data/product.dart';
+import 'package:nike_store/data/repo/banner_repository.dart';
 import 'package:nike_store/data/repo/product_repository.dart';
 import 'package:nike_store/theme.dart';
 
@@ -17,6 +18,12 @@ class MyApp extends StatelessWidget {
       print(value.toString());
     }).catchError((e) {
       print(e.toString());
+    });
+
+    bannerRepository.getAll().then((value) {
+      print(value.toString());
+    }).catchError((e) {
+      print(e.toString);
     });
     const defaultTextStyle = TextStyle(
         fontFamily: 'Vazir', color: LightThemeColors.primaryTextColor);

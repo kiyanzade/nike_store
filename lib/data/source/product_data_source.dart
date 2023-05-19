@@ -29,8 +29,8 @@ final Dio httpClient;
     final response =await httpClient.get('product/search?q=$searchTerm');
     validateResponse(response);
     final products =<Product> [];
-    (response.data as List).forEach((element) {
-      products.add(Product.fromJSON(element));
+    (response.data as List).forEach((jsonObj) {
+      products.add(Product.fromJSON(jsonObj));
     });
     return products;
   }
