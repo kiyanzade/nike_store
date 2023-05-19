@@ -37,7 +37,7 @@ final Dio httpClient;
 
   validateResponse(Response response){
     if(response.statusCode!=200){
-      throw AppExeption();
+      throw AppException();
     }
   }
 }

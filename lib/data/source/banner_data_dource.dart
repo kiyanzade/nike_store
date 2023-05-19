@@ -24,7 +24,7 @@ class BannerRemoteDataSource implements IBannerDataSource {
 
     validateResponse(Response response){
     if(response.statusCode!=200){
-      throw AppExeption();
+      throw AppException();
     }
   }
 }

@@ -1,5 +1,5 @@
-class AppExeption {
+class AppException {
   final String message;
 
-  AppExeption({this.message='خطای نامشخص'});
+  AppException({this.message='خطای نامشخص'});
 }
