@@ -4,6 +4,8 @@ import 'package:nike_store/ui/home/bloc/home_bloc.dart';
 
 import '../../data/repo/banner_repository.dart';
 import '../../data/repo/product_repository.dart';
+import '../widgets/bannerSlider.dart';
+import '../widgets/imageService.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,14 +26,20 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context, state) {
               if (state is HomeSuccessState) {
                 return ListView.builder(
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 100),
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       switch (index) {
                         case 0:
-                          return Image.asset(
-                            'assets/images/nike_logo.png',
-                            height: 32,
+                          return Container(
+                            padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                            child: Image.asset(
+                              'assets/images/nike_logo.png',
+                              height: 24,
+                            ),
+                          );
+                        case 2:
+                          return BannerSlider(
+                            banners: state.banners,
                           );
                         default:
                           return Container();

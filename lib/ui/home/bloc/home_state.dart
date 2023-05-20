@@ -20,7 +20,7 @@ class HomeErrorState extends HomeState {
 
 class HomeSuccessState extends HomeState {
   final List<Product> latestProducts;
-  final List<Banner> banners;
+  final List<BannerEntity> banners;
   final List<Product> popularProducts;
 
   HomeSuccessState({required this.latestProducts, required this.banners, required this.popularProducts});

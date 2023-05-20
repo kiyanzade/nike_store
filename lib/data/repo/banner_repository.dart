@@ -8,7 +8,7 @@ final BannerRepository bannerRepository = BannerRepository(BannerRemoteDataSourc
 
 
 abstract class IBannerRepository {
-  Future<List<Banner>> getAll();
+  Future<List<BannerEntity>> getAll();
 }
 
 
@@ -18,7 +18,7 @@ final IBannerDataSource dataSource;
   BannerRepository(this.dataSource);
 
   @override
-  Future<List<Banner>> getAll() {
+  Future<List<BannerEntity>> getAll() {
       return dataSource.getAll();
   }
 

@@ -4,7 +4,7 @@ import '../../common/exceptions.dart';
 import '../banner.dart';
 
 abstract class IBannerDataSource {
-  Future<List<Banner>> getAll();
+  Future<List<BannerEntity>> getAll();
 }
 
 class BannerRemoteDataSource implements IBannerDataSource {
@@ -12,12 +12,12 @@ class BannerRemoteDataSource implements IBannerDataSource {
 
   BannerRemoteDataSource(this.httpClient);
   @override
-  Future<List<Banner>> getAll() async {
+  Future<List<BannerEntity>> getAll() async {
     final response = await httpClient.get('banner/slider');
     validateResponse(response);
-    final banners = <Banner>[];
+    final banners = <BannerEntity>[];
     (response.data as List).forEach((jsonObj) {
-      banners.add(Banner.fromJSON(jsonObj));
+      banners.add(BannerEntity.fromJSON(jsonObj));
     });
     return banners;
   }
