@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ImageLoadingService extends StatelessWidget {
   final String imageUrl;
   final BorderRadius? borderRadius;
-  const  ImageLoadingService({
+  const ImageLoadingService({
     super.key,
     required this.imageUrl,
     required this.borderRadius,
@@ -19,7 +19,7 @@ class ImageLoadingService extends StatelessWidget {
         imageUrl: imageUrl,
         placeholder: (context, url) => CircularProgressIndicator(),
         errorWidget: (context, url, error) => Icon(Icons.error),
-        fit: BoxFit.cover ,
+        fit: BoxFit.cover,
       ),
     );
   }

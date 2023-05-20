@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
           button: defaultTextStyle,
           bodyText2: defaultTextStyle,
-          headline6: defaultTextStyle.copyWith(fontWeight: FontWeight.bold),
+          headline6: defaultTextStyle.copyWith(fontWeight: FontWeight.bold,fontSize: 18),
           caption:
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
         ),
