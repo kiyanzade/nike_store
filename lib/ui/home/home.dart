@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/ui/home/bloc/home_bloc.dart';
 
+import '../../data/product.dart';
 import '../../data/repo/banner_repository.dart';
 import '../../data/repo/product_repository.dart';
 import '../widgets/bannerSlider.dart';
@@ -26,6 +28,7 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context, state) {
               if (state is HomeSuccessState) {
                 return ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       switch (index) {
@@ -37,9 +40,22 @@ class HomeScreen extends StatelessWidget {
                               height: 24,
                             ),
                           );
+
                         case 2:
                           return BannerSlider(
                             banners: state.banners,
+                          );
+                        case 3:
+                          return _HorizontalProductList(
+                            title: "جدیدترین",
+                            onTap: () {},
+                            products: state.latestProducts,
+                          );
+                        case 4:
+                          return _HorizontalProductList(
+                            title: "پربازدیدترین",
+                            onTap: () {},
+                            products: state.popularProducts,
                           );
                         default:
                           return Container();
@@ -67,4 +83,114 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class _HorizontalProductList extends StatelessWidget {
+  final String title;
+  final Function() onTap;
+  final List<Product> products;
+  const _HorizontalProductList({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.products,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 12, left: 12),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+              title,
+              style: Theme.of(context).textTheme.subtitle1,
+            ),
+            TextButton(
+              onPressed: onTap,
+              child: Text(
+                'مشاهده همه',
+              ),
+            ),
+          ]),
+        ),
+        SizedBox(
+          height: 310,
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemCount: products.length,
+            padding: EdgeInsets.only(right: 8, left: 8),
+            itemBuilder: (context, index) {
+              final product = products[index];
+              return Padding(
+                  padding: const EdgeInsets.only(right: 4, left: 4),
+                  child: SizedBox(
+                    width: 176,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            SizedBox(
+                              height: 189,
+                              width: 186,
+                              child: ImageLoadingService(
+                                  imageUrl: product.imageUrl,
+                                  borderRadius: BorderRadius.circular(12)),
+                            ),
+                            Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                width: 32,
+                                height: 32,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white),
+                                child: Icon(CupertinoIcons.heart),
+                              ),
+                            )
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 8),
+                              Text(
+                                product.title,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                product.previousPrice.withPriceLabel,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption!
+                                    .copyWith(
+                                        decoration: TextDecoration.lineThrough),
+                              ),
+                              Text(product.price.withPriceLabel),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ));
+            },
+          ),
+        )
+      ],
+    );
+  }
+}
+
+extension PriceLabel on int {
+  String get withPriceLabel => '$this تومان';
 }

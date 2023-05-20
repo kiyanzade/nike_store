@@ -41,6 +41,9 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         textTheme: TextTheme(
+          subtitle1:
+              defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
+          button: defaultTextStyle,
           bodyText2: defaultTextStyle,
           headline6: defaultTextStyle.copyWith(fontWeight: FontWeight.bold),
           caption:
