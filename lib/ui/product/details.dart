@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nike_store/theme.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/product/comment/comment_list.dart';
 import 'package:nike_store/ui/widgets/imageService.dart';
 
 import '../../data/product.dart';
@@ -19,7 +20,7 @@ class ProductDetailsScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width - 48,
           child: FloatingActionButton.extended(
               onPressed: () {}, label: Text('افزودن به سبد خرید')),
-        ),git 
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
@@ -75,14 +76,10 @@ class ProductDetailsScreen extends StatelessWidget {
                         ),
                         TextButton(onPressed: () {}, child: Text('ثبت نظر'))
                       ]),
-                  Container(
-                    width: 80,
-                    height: 1000,
-                    color: Colors.black,
-                  ),
                 ]),
               ),
             ),
+            CommentList(productId: product.id),
           ],
         ),
       ),

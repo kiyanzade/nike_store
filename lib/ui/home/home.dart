@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/ui/home/bloc/home_bloc.dart';
 
+import '../../common/exceptions.dart';
 import '../../data/product.dart';
 import '../../data/repo/banner_repository.dart';
 import '../../data/repo/product_repository.dart';
 import '../product/product.dart';
 import '../widgets/bannerSlider.dart';
+import '../widgets/errorRefresh.dart';
 import '../widgets/imageService.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -65,16 +67,11 @@ class HomeScreen extends StatelessWidget {
               } else if (state is HomeLoadingState) {
                 return Center(child: CircularProgressIndicator());
               } else if (state is HomeErrorState) {
-                return Column(
-                  children: [
-                    Text(state.exception.message),
-                    TextButton(
-                        onPressed: () {
-                          BlocProvider.of<HomeBloc>(context)
-                              .add(HomeRefreshEvent());
-                        },
-                        child: Text('تلاش مجدد'))
-                  ],
+                return AppErrorWidget(
+                  exception: state.exception,
+                  onPressed: () {
+                    BlocProvider.of<HomeBloc>(context).add(HomeRefreshEvent());
+                  },
                 );
               } else
                 throw Exception('state is not supported');
@@ -134,7 +131,6 @@ class _HorizontalProductList extends StatelessWidget {
     );
   }
 }
-
 
 extension PriceLabel on int {
   String get withPriceLabel => '$this تومان';
