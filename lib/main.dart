@@ -4,6 +4,7 @@ import 'package:nike_store/data/repo/banner_repository.dart';
 import 'package:nike_store/data/repo/product_repository.dart';
 import 'package:nike_store/theme.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/root.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
           button: defaultTextStyle,
           bodyText2: defaultTextStyle,
-          headline6: defaultTextStyle.copyWith(fontWeight: FontWeight.bold,fontSize: 18),
+          headline6: defaultTextStyle.copyWith(
+              fontWeight: FontWeight.bold, fontSize: 18),
           caption:
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
         ),
@@ -57,7 +59,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Directionality(
         textDirection: TextDirection.rtl,
-        child: const HomeScreen(),
+        child: const RootScreen(),
       ),
     );
   }
