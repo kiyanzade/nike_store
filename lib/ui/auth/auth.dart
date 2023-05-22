@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nike_store/data/repo/auth_repository.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -79,7 +80,9 @@ class _AuthScreenState extends State<AuthScreen> {
               const _PasswordWidget(),
               const SizedBox(height: 24),
               ElevatedButton(
-                  onPressed: () {}, child: Text(isLoging ? 'ورود' : 'ثبت نام')),
+                  onPressed: () {
+                    authRepository.login("test@gmail.com", "123456");
+                  }, child: Text(isLoging ? 'ورود' : 'ثبت نام')),
               SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
