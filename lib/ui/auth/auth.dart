@@ -11,6 +11,10 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool isLoging = true;
+  final TextEditingController usernameController =
+      TextEditingController(text: 'test@gmail.com');
+  final TextEditingController passwordController =
+      TextEditingController(text: '123456');
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
@@ -56,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               Text(
                 isLoging ? 'خوش آمدید' : 'ثبت نام',
-                style: TextStyle(color: Colors.white, fontSize: 22),
+                style: const TextStyle(color: Colors.white, fontSize: 22),
               ),
               const SizedBox(
                 height: 5,
@@ -65,25 +69,30 @@ class _AuthScreenState extends State<AuthScreen> {
                 isLoging
                     ? 'لطفا اطلاعات کاربری خود را وارد کنید'
                     : 'ایمیل و رمز عبور خود را تعیین کنید',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
               const SizedBox(
                 height: 24,
               ),
-              const TextField(
+              TextField(
+                controller: usernameController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('آدرس ایمیل'),
                 ),
               ),
               const SizedBox(height: 16),
-              const _PasswordWidget(),
+              _PasswordWidget(
+                passwordController: passwordController,
+              ),
               const SizedBox(height: 24),
               ElevatedButton(
                   onPressed: () {
-                    authRepository.signUp("test278@gmail.com", "123456");
-                  }, child: Text(isLoging ? 'ورود' : 'ثبت نام')),
-              SizedBox(height: 24),
+                    authRepository.login(
+                        usernameController.text, passwordController.text);
+                  },
+                  child: Text(isLoging ? 'ورود' : 'ثبت نام')),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -91,7 +100,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     isLoging ? 'حساب کاربری ندارید؟' : 'حساب کاربری دارید؟',
                     style: TextStyle(color: Colors.white.withOpacity(0.7)),
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   TextButton(
                     onPressed: () {
                       setState(() {
@@ -116,8 +125,10 @@ class _AuthScreenState extends State<AuthScreen> {
 }
 
 class _PasswordWidget extends StatefulWidget {
+  final TextEditingController passwordController;
   const _PasswordWidget({
     super.key,
+    required this.passwordController,
   });
 
   @override
@@ -129,6 +140,7 @@ class _PasswordWidgetState extends State<_PasswordWidget> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: widget.passwordController,
       keyboardType: TextInputType.visiblePassword,
       obscureText: value,
       decoration: InputDecoration(
