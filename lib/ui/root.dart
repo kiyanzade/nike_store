@@ -48,7 +48,9 @@ class _RootScreenState extends State<RootScreen> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-          body: IndexedStack(index: selectedScreenIndex, children: [
+          body: IndexedStack(
+            index: selectedScreenIndex,
+             children: [
             _navigator(_homeKey, homeIndex, const HomeScreen()),
             _navigator(
                 _cartKey,
@@ -56,8 +58,8 @@ class _RootScreenState extends State<RootScreen> {
                 const Center(
                   child: Text("cart"),
                 )),
-            _navigator(
-                _profileKey, profileIndex, const Center(child: Text("profile"))),
+            _navigator(_profileKey, profileIndex,
+                const Center(child: Text("profile"))),
           ]),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: selectedScreenIndex,
@@ -68,12 +70,12 @@ class _RootScreenState extends State<RootScreen> {
                 selectedScreenIndex = selectedindex;
               });
             },
-            items: [
-              const BottomNavigationBarItem(
+            items: const [
+              BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.home), label: 'خانه'),
-                   const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.cart), label: 'سبد خرید'),
-                   const BottomNavigationBarItem(
+              BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.person), label: 'پروفایل'),
             ],
           ),
@@ -86,9 +88,11 @@ class _RootScreenState extends State<RootScreen> {
         : Navigator(
             key: key,
             onGenerateRoute: (settings) => MaterialPageRoute(
-                builder: (context) => Offstage(
-                      offstage: selectedScreenIndex != index,
-                      child: child,
-                    )));
+              builder: (context) => Offstage(
+                offstage: selectedScreenIndex != index,
+                child: child,
+              ),
+            ),
+          );
   }
 }
