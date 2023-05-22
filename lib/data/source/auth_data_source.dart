@@ -28,17 +28,24 @@ class AuthRemoteDataSource implements IAuthDataSource {
   }
 
   @override
-  Future<AuthInfo> refreshToken(String token) {
-    // TODO: implement refreshToken
-    throw UnimplementedError();
+  Future<AuthInfo> refreshToken(String token) async {
+    final response = await httpClient.post("auth/token", data: {
+      "grant_type": "refresh_token",
+      "refresh_token": token,
+      "client_id": 2,
+      "client_secret": "kyj1c9sVcksqGU4scMX7nLDalkjp2WoqQEf8PKAC",
+    });
+    validateResponse(response);
+    return AuthInfo(
+        response.data["access_token"], response.data["refresh_token"]);
   }
 
   @override
   Future<AuthInfo> signUp(String username, String password) async {
-    final response = await httpClient.post("user/register",
-        data: {"email": username, "password": password});
+    final response = await httpClient
+        .post("user/register", data: {"email": username, "password": password});
     validateResponse(response);
-    return login(username, password); 
+    return login(username, password);
   }
 
   validateResponse(Response response) {
