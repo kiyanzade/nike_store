@@ -81,7 +81,7 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 24),
               ElevatedButton(
                   onPressed: () {
-                    authRepository.login("test@gmail.com", "123456");
+                    authRepository.signUp("test278@gmail.com", "123456");
                   }, child: Text(isLoging ? 'ورود' : 'ثبت نام')),
               SizedBox(height: 24),
               Row(
