@@ -10,6 +10,7 @@ abstract class IAuthRepository {
   Future<void> login(String username, String password);
   Future<void> signUp(String username, String password);
   Future<void> refreshToken();
+  Future<void> signOut();
 }
 
 class AuthRepository implements IAuthRepository {
@@ -35,18 +36,25 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<void> refreshToken() async {
-    final AuthInfo authInfo = await authDataSource.refreshToken("");
-    _persistAuthToken(authInfo);
+    if (authChangeNotifier.value != null) {
+      final AuthInfo authInfo = await authDataSource
+          .refreshToken(authChangeNotifier.value!.refreshToken);
+          debugPrint('refresh token is: ${authInfo.accessToken}');
+      _persistAuthToken(authInfo);
+    }
   }
 
   Future<void> _persistAuthToken(AuthInfo authInfo) async {
-   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString("access_token", authInfo.accsesToken);
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.setString("access_token", authInfo.accessToken);
     sharedPreferences.setString("refresh_token", authInfo.refreshToken);
+    loadAuthToken();
   }
 
   Future<void> loadAuthToken() async {
-   final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     final String accessToken =
         sharedPreferences.getString("access_token") ?? "";
     final String refreshToken =
@@ -54,5 +62,13 @@ class AuthRepository implements IAuthRepository {
     if (accessToken.isNotEmpty && refreshToken.isNotEmpty) {
       authChangeNotifier.value = AuthInfo(accessToken, refreshToken);
     }
+  }
+
+  @override
+  Future<void> signOut() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    authChangeNotifier.value = null;
   }
 }

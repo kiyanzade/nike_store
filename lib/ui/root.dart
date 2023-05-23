@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nike_store/ui/cart/cart.dart';
 import 'package:nike_store/ui/home/home.dart';
 
 const int homeIndex = 0;
@@ -48,16 +49,13 @@ class _RootScreenState extends State<RootScreen> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
-          body: IndexedStack(
-            index: selectedScreenIndex,
-             children: [
+          body: IndexedStack(index: selectedScreenIndex, children: [
             _navigator(_homeKey, homeIndex, const HomeScreen()),
             _navigator(
-                _cartKey,
-                cartIndex,
-                const Center(
-                  child: Text("cart"),
-                )),
+              _cartKey,
+              cartIndex,
+              CartScreen(),
+            ),
             _navigator(_profileKey, profileIndex,
                 const Center(child: Text("profile"))),
           ]),
