@@ -19,7 +19,7 @@ final Dio httpClient;
     validateResponse(response);
     final products =<Product> [];
     (response.data as List).forEach((element) {
-      products.add(Product.fromJSON(element));
+      products.add(Product.fromJson(element));
     });
     return products;
   }
@@ -30,7 +30,7 @@ final Dio httpClient;
     validateResponse(response);
     final products =<Product> [];
     (response.data as List).forEach((jsonObj) {
-      products.add(Product.fromJSON(jsonObj));
+      products.add(Product.fromJson(jsonObj));
     });
     return products;
   }

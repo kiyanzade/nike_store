@@ -13,7 +13,7 @@ class Product {
   final int descount;
   final int previousPrice;
 
-  Product.fromJSON(Map<String, dynamic> json)
+  Product.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
         imageUrl = json['image'],
