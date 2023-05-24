@@ -9,6 +9,17 @@ class CartItem {
 
   CartItem.fromJson(Map<String, dynamic> json)
       : cartItemtId = json['cart_item_id'],
-        product = Product.fromJson(json['product']),  // ....
+        product = Product.fromJson(json['product']), // ....
         count = json['count'];
+
+  static List<CartItem> parseJsonArray(List<dynamic> jsonArray) {
+    final List<CartItem> cartItems = [];
+    jsonArray.forEach(
+      (element) {
+        cartItems.add(CartItem.fromJson(element));
+      },
+    );
+
+    return cartItems;
+  }
 }

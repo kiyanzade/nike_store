@@ -1,11 +1,14 @@
-class CartResponse {
-  final int cartItemId; // شناسه محصول داخل سبد خرید کاربر
-  final int productId;
-  final int count;
+import 'cart_itam.dart';
 
-  CartResponse(this.cartItemId, this.productId, this.count);
-  CartResponse.fromJSON(Map<String, dynamic> json)
-      : cartItemId = json['id'],
-        productId = json['product_id'],
-        count = json['count'];
+class CartResponse {
+  final List<CartItem> cartItems;
+  final int payablePrice;
+  final int totalPrice;
+  final int shippingPrice;
+
+  CartResponse.fromJson(Map<String, dynamic> json)
+      : cartItems = CartItem.parseJsonArray(json['cart_items']),
+        payablePrice = json['payable_price'],
+        totalPrice = json['total_price'],
+        shippingPrice = json['shipping_cost'];
 }

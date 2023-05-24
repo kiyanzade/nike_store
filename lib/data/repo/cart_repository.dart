@@ -1,4 +1,5 @@
 import 'package:nike_store/common/http_client.dart';
+import 'package:nike_store/data/add_to_cart_response.dart';
 import 'package:nike_store/data/cart_response.dart';
 import 'package:nike_store/data/repo/product_repository.dart';
 import 'package:nike_store/data/source/cart_data_source.dart';
@@ -9,15 +10,15 @@ import '../cart_itam.dart';
 final ICartRepository cartRepository = CartRepository(CartRemoteDataSource(httpClient));
 
 abstract class ICartRepository {
-  Future<CartResponse> add(
+  Future<AddToCartResponse> add(
     int productId,
   );
-  Future<CartResponse> delete(
+  Future<AddToCartResponse> delete(
     int cartItemId,
   );
-  Future<CartResponse> changeCount(int cartItemId, int count);
+  Future<AddToCartResponse> changeCount(int cartItemId, int count);
   Future<int> count();
-  Future<List<CartItem>> getAll();
+  Future<CartResponse> getAll();
 }
 
 class CartRepository extends ICartRepository {
@@ -26,12 +27,12 @@ class CartRepository extends ICartRepository {
   CartRepository(this.cartDataSource);
 
   @override
-  Future<CartResponse> add(int productId) {
+  Future<AddToCartResponse> add(int productId) {
     return cartDataSource.add(productId);
   }
 
   @override
-  Future<CartResponse> changeCount(int cartItemId, int count) {
+  Future<AddToCartResponse> changeCount(int cartItemId, int count) {
     return cartDataSource.changeCount(cartItemId, count);
   }
 
@@ -41,12 +42,12 @@ class CartRepository extends ICartRepository {
   }
 
   @override
-  Future<CartResponse> delete(int cartItemId) {
+  Future<AddToCartResponse> delete(int cartItemId) {
     return cartDataSource.delete(cartItemId);
   }
 
   @override
-  Future<List<CartItem>> getAll() {
+  Future<CartResponse> getAll() {
     return cartDataSource.getAll();
   }
 }
