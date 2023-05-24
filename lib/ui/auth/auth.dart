@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/repo/auth_repository.dart';
@@ -93,8 +92,8 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                           Text(
                             state.isLoginMode ? 'خوش آمدید' : 'ثبت نام',
-                            style:
-                                const TextStyle(color: Colors.white, fontSize: 22),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 22),
                           ),
                           const SizedBox(
                             height: 5,
@@ -103,8 +102,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             state.isLoginMode
                                 ? 'لطفا اطلاعات کاربری خود را وارد کنید'
                                 : 'ایمیل و رمز عبور خود را تعیین کنید',
-                            style:
-                                const TextStyle(color: Colors.white, fontSize: 16),
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
                           ),
                           const SizedBox(
                             height: 24,
@@ -132,7 +131,8 @@ class _AuthScreenState extends State<AuthScreen> {
                               },
                               child: state is AuthLoadingState
                                   ? const CircularProgressIndicator()
-                                  : Text(state.isLoginMode ? 'ورود' : 'ثبت نام')),
+                                  : Text(
+                                      state.isLoginMode ? 'ورود' : 'ثبت نام')),
                           const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -141,8 +141,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                 state.isLoginMode
                                     ? 'حساب کاربری ندارید؟'
                                     : 'حساب کاربری دارید؟',
-                                style:
-                                    TextStyle(color: Colors.white.withOpacity(0.7)),
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7)),
                               ),
                               const SizedBox(width: 8),
                               TextButton(
