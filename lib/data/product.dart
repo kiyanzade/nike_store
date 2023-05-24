@@ -18,6 +18,7 @@ class Product {
         title = json['title'],
         imageUrl = json['image'],
         price = json['price'],
-        previousPrice = json['previous_price'] ?? json['price'],
+        previousPrice =
+            json['previous_price'] ?? json['price'] + json['discount'],
         descount = json['discount'];
 }
