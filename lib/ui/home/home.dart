@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:nike_store/ui/home/bloc/home_bloc.dart';
 
 import '../../common/exceptions.dart';
@@ -133,5 +134,10 @@ class _HorizontalProductList extends StatelessWidget {
 }
 
 extension PriceLabel on int {
-  String get withPriceLabel => '$this تومان';
+  String get withPriceLabel => '$separateByComma تومان';
+
+  String get separateByComma{
+    final numberFormat = NumberFormat.decimalPattern();
+    return numberFormat.format(this);
+  }
 }

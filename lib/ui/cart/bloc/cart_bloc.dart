@@ -45,17 +45,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             final successState = state as CartSuccessState;
             successState.cartResponse.cartItems.removeWhere(
                 (element) => element.cartItemtId == event.cartItemId);
-            if (successState.cartResponse.cartItems.isEmpty)
+            if (successState.cartResponse.cartItems.isEmpty) {
               emit(CartEmptyState());
-            else
-              emit(CartSuccessState(successState.cartResponse));
+            } else {
+              emit(calculatePriceInfo(successState.cartResponse));
+            }
           }
         } catch (e) {}
       } else if (event is CartAuthInfoChangedEvent) {
         if (event.authInfo == null || event.authInfo!.accessToken.isEmpty) {
           emit(CartAuthRequiredState());
         } else {
-          if (state is CartAuthRequiredState)
+          if (state is CartAuthRequiredState) {
             try {
               emit(CartLoadingState());
               final cartResponse = await cartRepository.getAll();
@@ -63,8 +64,28 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             } catch (e) {
               emit(CartErrorState(AppException()));
             }
+          }
         }
       }
     });
+  }
+
+  CartSuccessState calculatePriceInfo(CartResponse cartResponse) {
+    int totalPrice = 0;
+    int shippingPrice = 0;
+    int payablePrice = 0;
+
+    cartResponse.cartItems.forEach((cartItem) {
+      totalPrice += cartItem.product.previousPrice * cartItem.count;
+      payablePrice += cartItem.product.price * cartItem.count;
+    });
+
+    shippingPrice = payablePrice >= 250000 ? 0 : 30000;
+
+    cartResponse.payablePrice = payablePrice;
+    cartResponse.shippingPrice = shippingPrice;
+    cartResponse.totalPrice = totalPrice;
+
+    return CartSuccessState(cartResponse);
   }
 }
