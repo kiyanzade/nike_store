@@ -4,6 +4,7 @@ class CartItem {
   final int cartItemtId;
   final Product product;
   final int count;
+  bool deleteButtonLoading = false;
 
   CartItem(this.cartItemtId, this.product, this.count);
 

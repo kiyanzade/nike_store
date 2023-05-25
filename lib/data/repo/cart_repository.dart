@@ -13,7 +13,7 @@ abstract class ICartRepository {
   Future<AddToCartResponse> add(
     int productId,
   );
-  Future<AddToCartResponse> delete(
+  Future<void> delete(
     int cartItemId,
   );
   Future<AddToCartResponse> changeCount(int cartItemId, int count);
@@ -42,7 +42,7 @@ class CartRepository extends ICartRepository {
   }
 
   @override
-  Future<AddToCartResponse> delete(int cartItemId) {
+  Future<void> delete(int cartItemId) {
     return cartDataSource.delete(cartItemId);
   }
 

@@ -8,7 +8,7 @@ abstract class ICartDataSource {
   Future<AddToCartResponse> add(
     int productId,
   );
-  Future<AddToCartResponse> delete(
+  Future<void> delete(
     int cartItemId,
   );
   Future<AddToCartResponse> changeCount(int cartItemId, int count);
@@ -42,9 +42,8 @@ class CartRemoteDataSource extends ICartDataSource {
   }
 
   @override
-  Future<AddToCartResponse> delete(int cartItemId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(int cartItemId)async {
+  await httpClient.post("cart/remove",data: {"cart_item_id": cartItemId});
   }
 
   @override
