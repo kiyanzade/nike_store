@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nike_store/data/auth_info.dart';
 import 'package:nike_store/data/repo/cart_repository.dart';
 import 'package:nike_store/ui/cart/bloc/cart_bloc.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/widgets/emptyScreen.dart';
 import 'package:nike_store/ui/widgets/imageService.dart';
 
 import '../../data/repo/auth_repository.dart';
@@ -18,7 +20,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-    CartBloc? cartBloc;
+  CartBloc? cartBloc;
   @override
   void initState() {
     super.initState();
@@ -26,7 +28,8 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void authChangeNotifierListener() {
-    cartBloc?.add(CartAuthInfoChangedEvent(AuthRepository.authChangeNotifier.value));
+    cartBloc?.add(
+        CartAuthInfoChangedEvent(AuthRepository.authChangeNotifier.value));
   }
 
   @override
@@ -35,12 +38,13 @@ class _CartScreenState extends State<CartScreen> {
     AuthRepository.authChangeNotifier
         .removeListener(authChangeNotifierListener);
 
-        cartBloc?.close();
+    cartBloc?.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF5F5F5),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("سبد خرید"),
@@ -164,23 +168,26 @@ class _CartScreenState extends State<CartScreen> {
                 itemCount: state.cartResponse.cartItems.length,
               );
             } else if (state is CartAuthRequiredState) {
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('لطفا وارد حساب کاربری خود شوید'),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AuthScreen(),
-                            ),
-                          );
-                        },
-                        child: Text('ورود'))
-                  ],
+              return EmptyScreen(
+                message: 'برای مشاهده سبد خرید لطفا وارد حساب کاربری خود شوید',
+                callToAction: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AuthScreen(),
+                        ),
+                      );
+                    },
+                    child: Text('ورود به حساب کاربری')),
+                image: SvgPicture.asset(
+                  'assets/images/auth_required.svg',
+                  width: 140,
                 ),
+              );
+            } else if (state is CartEmptyState) {
+              return EmptyScreen(
+                message: 'تاکنون هیچ محصولی در سبد خرید ثبت نشده است',
+                image: SvgPicture.asset('assets/images/empty_cart.svg'),
               );
             } else {
               throw Exception("Invalid State");
