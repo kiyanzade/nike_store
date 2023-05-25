@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +11,7 @@ import 'package:nike_store/ui/cart/bloc/cart_bloc.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/widgets/emptyScreen.dart';
 import 'package:nike_store/ui/widgets/imageService.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../data/repo/auth_repository.dart';
 import '../auth/auth.dart';
@@ -23,6 +26,8 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   CartBloc? cartBloc;
+  StreamSubscription? subscription;
+  final RefreshController refreshController = RefreshController();
   @override
   void initState() {
     super.initState();
@@ -40,13 +45,14 @@ class _CartScreenState extends State<CartScreen> {
     AuthRepository.authChangeNotifier
         .removeListener(authChangeNotifierListener);
 
+    subscription?.cancel();
     cartBloc?.close();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF5F5F5),
+      backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("سبد خرید"),
@@ -54,6 +60,16 @@ class _CartScreenState extends State<CartScreen> {
       body: BlocProvider<CartBloc>(
         create: (context) {
           final CartBloc cartBloc = CartBloc(cartRepository);
+          subscription = cartBloc.stream.listen((state) {
+            if (refreshController.isRefresh) {
+              if (state is CartSuccessState) {
+                refreshController.refreshCompleted();
+              } else if (state is CartErrorState) {
+                refreshController.refreshFailed();
+              }
+            }
+          });
+
           this.cartBloc = cartBloc;
           cartBloc
               .add(CartStartedEvent(AuthRepository.authChangeNotifier.value));
@@ -68,19 +84,26 @@ class _CartScreenState extends State<CartScreen> {
             } else if (state is CartErrorState) {
               return Center(child: Text(state.appException.message));
             } else if (state is CartSuccessState) {
-              return ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final cartItem = state.cartResponse.cartItems[index];
-                  return CartItemWidget(
-                    cartItem: cartItem,
-                    onDeleteButtonTapped: () {
-                      cartBloc?.add(
-                          CartDeleteButtonClickedEvent(cartItem.cartItemtId));
-                    },
-                  );
+              return SmartRefresher(
+                controller: refreshController,
+                onRefresh: () {
+                  cartBloc?.add(CartStartedEvent(
+                      AuthRepository.authChangeNotifier.value));
                 },
-                itemCount: state.cartResponse.cartItems.length,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final cartItem = state.cartResponse.cartItems[index];
+                    return CartItemWidget(
+                      cartItem: cartItem,
+                      onDeleteButtonTapped: () {
+                        cartBloc?.add(
+                            CartDeleteButtonClickedEvent(cartItem.cartItemtId));
+                      },
+                    );
+                  },
+                  itemCount: state.cartResponse.cartItems.length,
+                ),
               );
             } else if (state is CartAuthRequiredState) {
               return EmptyScreen(
@@ -89,11 +112,11 @@ class _CartScreenState extends State<CartScreen> {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AuthScreen(),
+                          builder: (context) => const AuthScreen(),
                         ),
                       );
                     },
-                    child: Text('ورود به حساب کاربری')),
+                    child: const Text('ورود به حساب کاربری')),
                 image: SvgPicture.asset(
                   'assets/images/auth_required.svg',
                   width: 140,
