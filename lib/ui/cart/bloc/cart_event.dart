@@ -8,22 +8,35 @@ abstract class CartEvent extends Equatable {
 }
 
 class CartStartedEvent extends CartEvent {
-final AuthInfo? authInfo;
+  final AuthInfo? authInfo;
 
   const CartStartedEvent(this.authInfo);
-
 }
 
 class CartDeleteButtonClickedEvent extends CartEvent {
   final int cartItemId;
 
   const CartDeleteButtonClickedEvent(this.cartItemId);
-@override
-   List<Object> get props => [cartItemId];
+  @override
+  List<Object> get props => [cartItemId];
 }
 
 class CartAuthInfoChangedEvent extends CartEvent {
-final AuthInfo? authInfo;
+  final AuthInfo? authInfo;
 
   const CartAuthInfoChangedEvent(this.authInfo);
+}
+
+class CartPlusCountButtonClickedEvent extends CartEvent {
+  final int cartItemId;
+  @override
+  List<Object> get props => [cartItemId];
+  const CartPlusCountButtonClickedEvent(this.cartItemId);
+}
+
+class CartMinusCountButtonClickedEvent extends CartEvent {
+  final int cartItemId;
+  @override
+  List<Object> get props => [cartItemId];
+  const CartMinusCountButtonClickedEvent(this.cartItemId);
 }

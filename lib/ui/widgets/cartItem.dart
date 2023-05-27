@@ -8,11 +8,16 @@ import 'imageService.dart';
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({
     super.key,
-    required this.cartItem, required this.onDeleteButtonTapped,
+    required this.cartItem,
+    required this.onDeleteButtonTapped,
+    required this.onPlusButtonTapped,
+    required this.onMinusButtonTapped,
   });
 
   final CartItem cartItem;
   final Function() onDeleteButtonTapped;
+  final Function() onPlusButtonTapped;
+  final Function() onMinusButtonTapped;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +69,16 @@ class CartItemWidget extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                            onPressed: () {},
+                            onPressed: onPlusButtonTapped,
                             icon: const Icon(CupertinoIcons.plus_rectangle)),
-                        Text(
-                          cartItem.count.toString(),
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
+                        cartItem.changeCountLoading
+                            ? CupertinoActivityIndicator()
+                            : Text(
+                                cartItem.count.toString(),
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: onMinusButtonTapped,
                             icon: const Icon(CupertinoIcons.minus_rectangle)),
                       ],
                     )

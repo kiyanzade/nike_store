@@ -66,6 +66,46 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             }
           }
         }
+      } else if (event is CartPlusCountButtonClickedEvent) {
+        try {
+          if (state is CartSuccessState) {
+            final successState = state as CartSuccessState;
+            final cartItemDeleting = successState.cartResponse.cartItems
+                .firstWhere(
+                    (element) => element.cartItemtId == event.cartItemId);
+            cartItemDeleting.changeCountLoading = true;
+            emit(CartSuccessState(successState.cartResponse));
+            int newCount = ++cartItemDeleting.count;
+            await cartRepository.changeCount(event.cartItemId, newCount);
+
+            successState.cartResponse.cartItems.firstWhere(
+                (element) => element.cartItemtId == event.cartItemId)
+              ..count = newCount
+              ..changeCountLoading = false;
+
+            emit(calculatePriceInfo(successState.cartResponse));
+          }
+        } catch (e) {}
+      } else if (event is CartMinusCountButtonClickedEvent) {
+        try {
+          if (state is CartSuccessState) {
+            final successState = state as CartSuccessState;
+            final cartItemDeleting = successState.cartResponse.cartItems
+                .firstWhere(
+                    (element) => element.cartItemtId == event.cartItemId);
+            cartItemDeleting.changeCountLoading = true;
+            emit(CartSuccessState(successState.cartResponse));
+            int newCount = --cartItemDeleting.count;
+            await cartRepository.changeCount(event.cartItemId, newCount);
+
+            successState.cartResponse.cartItems.firstWhere(
+                (element) => element.cartItemtId == event.cartItemId)
+              ..count = newCount
+              ..changeCountLoading = false;
+
+            emit(calculatePriceInfo(successState.cartResponse));
+          }
+        } catch (e) {}
       }
     });
   }

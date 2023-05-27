@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nike_store/data/repo/auth_repository.dart';
 import 'package:nike_store/ui/cart/cart.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/widgets/badge.dart';
 
 const int homeIndex = 0;
 const int cartIndex = 1;
@@ -55,7 +56,7 @@ class _RootScreenState extends State<RootScreen> {
             _navigator(
               _cartKey,
               cartIndex,
-              CartScreen(),
+              const CartScreen(),
             ),
             _navigator(
                 _profileKey,
@@ -63,12 +64,12 @@ class _RootScreenState extends State<RootScreen> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('profile'),
+                    const Text('profile'),
                     ElevatedButton(
                         onPressed: () {
                           authRepository.signOut();
                         },
-                        child: Text('Sign out'))
+                        child: const Text('Sign out'))
                   ],
                 )),
           ]),
@@ -81,12 +82,25 @@ class _RootScreenState extends State<RootScreen> {
                 selectedScreenIndex = selectedindex;
               });
             },
-            items: const [
-              BottomNavigationBarItem(
+            items: [
+              const BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.home), label: 'خانه'),
               BottomNavigationBarItem(
-                  icon: Icon(CupertinoIcons.cart), label: 'سبد خرید'),
-              BottomNavigationBarItem(
+                  icon: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      const Icon(CupertinoIcons.cart),
+                      Positioned(
+                        top: -4,
+                        right: -10,
+                        child: const BadgeWidget(
+                          value: 1,
+                        ),
+                      ),
+                    ],
+                  ),
+                  label: 'سبد خرید'),
+              const BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.person), label: 'پروفایل'),
             ],
           ),

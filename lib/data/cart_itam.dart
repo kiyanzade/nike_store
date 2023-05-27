@@ -3,8 +3,9 @@ import 'package:nike_store/data/product.dart';
 class CartItem {
   final int cartItemtId;
   final Product product;
-  final int count;
+  int count;
   bool deleteButtonLoading = false;
+  bool changeCountLoading = false;
 
   CartItem(this.cartItemtId, this.product, this.count);
 
