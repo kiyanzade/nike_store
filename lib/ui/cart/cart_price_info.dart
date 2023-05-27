@@ -24,7 +24,7 @@ class PriceInfo extends StatelessWidget {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(8, 4, 8, 32),
+          margin: EdgeInsets.fromLTRB(8, 4, 8, 16),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(2),
