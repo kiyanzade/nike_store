@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
+import 'package:nike_store/ui/reciept/payment_reciept.dart';
 
 class Shipping extends StatelessWidget {
   final int payablePrice;
@@ -63,7 +64,9 @@ class Shipping extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    onPressed: () {}, child: const Text('پرداخت اینترنتی')),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => PaymentReciept(),));
+                    }, child: const Text('پرداخت اینترنتی')),
                 const SizedBox(
                   width: 16,
                 ),
