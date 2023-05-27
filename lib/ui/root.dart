@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nike_store/data/repo/auth_repository.dart';
+import 'package:nike_store/data/repo/cart_repository.dart';
 import 'package:nike_store/ui/cart/cart.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/widgets/badge.dart';
@@ -68,6 +69,7 @@ class _RootScreenState extends State<RootScreen> {
                     ElevatedButton(
                         onPressed: () {
                           authRepository.signOut();
+                          CartRepository.cartItemCountNotifier.value=0;
                         },
                         child: const Text('Sign out'))
                   ],
@@ -93,8 +95,13 @@ class _RootScreenState extends State<RootScreen> {
                       Positioned(
                         top: -4,
                         right: -10,
-                        child: const BadgeWidget(
-                          value: 1,
+                        child: ValueListenableBuilder<int>(
+                          valueListenable: CartRepository.cartItemCountNotifier,
+                          builder: (context, value, child) {
+                            return BadgeWidget(
+                              value: value,
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -119,5 +126,11 @@ class _RootScreenState extends State<RootScreen> {
               ),
             ),
           );
+  }
+
+  @override
+  void initState() {
+    cartRepository.count();
+    super.initState();
   }
 }

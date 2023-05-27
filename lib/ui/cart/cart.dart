@@ -26,6 +26,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+   bool stateIsSuccsed = false;
   CartBloc? cartBloc;
   StreamSubscription? subscription;
   final RefreshController refreshController = RefreshController();
@@ -53,6 +54,18 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Visibility(
+        visible: stateIsSuccsed,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.only(left: 32, right: 32),
+          child: FloatingActionButton.extended(
+            onPressed: () {},
+            label: Text('پرداخت'),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       backgroundColor: const Color(0xffF5F5F5),
       appBar: AppBar(
         centerTitle: true,
@@ -62,6 +75,9 @@ class _CartScreenState extends State<CartScreen> {
         create: (context) {
           final CartBloc cartBloc = CartBloc(cartRepository);
           subscription = cartBloc.stream.listen((state) {
+            setState(() {
+              stateIsSuccsed = state is CartSuccessState;
+            });
             if (refreshController.isRefresh) {
               if (state is CartSuccessState) {
                 refreshController.refreshCompleted();
@@ -92,6 +108,7 @@ class _CartScreenState extends State<CartScreen> {
                       AuthRepository.authChangeNotifier.value));
                 },
                 child: ListView.builder(
+                  padding: EdgeInsets.only(bottom: 80),
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     if (index == state.cartResponse.cartItems.length) {
