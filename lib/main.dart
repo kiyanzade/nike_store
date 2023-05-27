@@ -45,9 +45,13 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-
+        scaffoldBackgroundColor: Colors.white,
+        hintColor: LightThemeColors.scondaryTextColor,
+        inputDecorationTheme:
+            InputDecorationTheme(border: OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: LightThemeColors.primaryTextColor.withOpacity(0.1)))),
         appBarTheme: AppBarTheme(
-          elevation: 0,
+            elevation: 0,
             color: Colors.white,
             foregroundColor: LightThemeColors.primaryTextColor),
         snackBarTheme: SnackBarThemeData(

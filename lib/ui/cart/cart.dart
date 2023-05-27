@@ -10,6 +10,7 @@ import 'package:nike_store/data/repo/cart_repository.dart';
 import 'package:nike_store/ui/cart/bloc/cart_bloc.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/shipping/shipping.dart';
 import 'package:nike_store/ui/widgets/emptyScreen.dart';
 import 'package:nike_store/ui/widgets/imageService.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -26,7 +27,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-   bool stateIsSuccsed = false;
+  bool stateIsSuccsed = false;
   CartBloc? cartBloc;
   StreamSubscription? subscription;
   final RefreshController refreshController = RefreshController();
@@ -54,13 +55,24 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.white,
       floatingActionButton: Visibility(
         visible: stateIsSuccsed,
         child: Container(
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.only(left: 32, right: 32),
           child: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () {
+              final state = cartBloc!.state;
+              if (state is CartSuccessState) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Shipping(
+                      shippingPrice: state.cartResponse.shippingPrice,
+                      payablePrice: state.cartResponse.payablePrice,
+                      totalPrice: state.cartResponse.totalPrice),
+                ));
+              }
+            },
             label: Text('پرداخت'),
           ),
         ),

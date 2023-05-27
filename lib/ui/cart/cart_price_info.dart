@@ -37,21 +37,24 @@ class PriceInfo extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 12, 12, 6),
+                padding: const EdgeInsets.fromLTRB(8, 16, 12, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('مبلغ کل خرید'),
                     Text(
                       totalPrice.withPriceLabel,
-                      style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 14),
+                      style: Theme.of(context)
+                          .textTheme
+                          .caption!
+                          .copyWith(fontSize: 14),
                     ),
                   ],
                 ),
               ),
               const Divider(height: 2),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 12, 12, 6),
+                padding: const EdgeInsets.fromLTRB(8, 16, 12, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -70,7 +73,7 @@ class PriceInfo extends StatelessWidget {
               ),
               const Divider(height: 2),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 12, 12, 6),
+                padding: const EdgeInsets.fromLTRB(8, 16, 12, 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -78,7 +81,10 @@ class PriceInfo extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                           text: payablePrice.separateByComma,
-                          style: Theme.of(context).textTheme.headline6!.copyWith(fontSize: 18),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6!
+                              .copyWith(fontSize: 18),
                           children: [
                             TextSpan(
                               text: ' تومان',
