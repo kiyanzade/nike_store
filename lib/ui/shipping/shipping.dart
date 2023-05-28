@@ -64,7 +64,9 @@ class _ShippingState extends State<Shipping> {
                   SnackBar(content: Text(state.appException.message)));
             } else if (state is ShippingSuccessState) {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const PaymentReciept(),
+                builder: (context) => PaymentReciept(
+                  orderId: state.result.orderId,
+                ),
               ));
             }
           });
