@@ -34,9 +34,8 @@ class ProductItem extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  SizedBox(
-                    height: 189,
-                    width: 186,
+                  AspectRatio(
+                    aspectRatio: 1,
                     child: ImageLoadingService(
                         imageUrl: product.imageUrl,
                         borderRadius: BorderRadius.circular(12)),

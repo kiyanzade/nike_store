@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:nike_store/ui/home/bloc/home_bloc.dart';
+import 'package:nike_store/ui/product_list/product_list.dart';
 
 import '../../common/exceptions.dart';
 import '../../data/product.dart';
@@ -32,13 +33,13 @@ class HomeScreen extends StatelessWidget {
             builder: (BuildContext context, state) {
               if (state is HomeSuccessState) {
                 return ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       switch (index) {
                         case 0:
                           return Container(
-                            padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                            padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                             child: Image.asset(
                               'assets/images/nike_logo.png',
                               height: 24,
@@ -52,13 +53,23 @@ class HomeScreen extends StatelessWidget {
                         case 3:
                           return _HorizontalProductList(
                             title: "جدیدترین",
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const ProductList(sort: ProductSort.latest),
+                              ));
+                            },
                             products: state.latestProducts,
                           );
                         case 4:
                           return _HorizontalProductList(
                             title: "پربازدیدترین",
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const ProductList(
+                                    sort: ProductSort.popular),
+                              ));
+                            },
                             products: state.popularProducts,
                           );
                         default:
@@ -66,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                       }
                     });
               } else if (state is HomeLoadingState) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (state is HomeErrorState) {
                 return AppErrorWidget(
                   exception: state.exception,
@@ -109,7 +120,7 @@ class _HorizontalProductList extends StatelessWidget {
             ),
             TextButton(
               onPressed: onTap,
-              child: Text(
+              child: const Text(
                 'مشاهده همه',
               ),
             ),
@@ -118,10 +129,10 @@ class _HorizontalProductList extends StatelessWidget {
         SizedBox(
           height: 310,
           child: ListView.builder(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: products.length,
-            padding: EdgeInsets.only(right: 8, left: 8),
+            padding: const EdgeInsets.only(right: 8, left: 8),
             itemBuilder: (context, index) {
               final product = products[index];
               return ProductItem(product: product);
@@ -136,7 +147,7 @@ class _HorizontalProductList extends StatelessWidget {
 extension PriceLabel on int {
   String get withPriceLabel => '$separateByComma تومان';
 
-  String get separateByComma{
+  String get separateByComma {
     final numberFormat = NumberFormat.decimalPattern();
     return numberFormat.format(this);
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/order.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
+import 'package:nike_store/ui/payment_webView.dart';
 import 'package:nike_store/ui/reciept/payment_reciept.dart';
 import 'package:nike_store/ui/shipping/bloc/shipping_bloc.dart';
 
@@ -63,11 +64,19 @@ class _ShippingState extends State<Shipping> {
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.appException.message)));
             } else if (state is ShippingSuccessState) {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => PaymentReciept(
-                  orderId: state.result.orderId,
-                ),
-              ));
+              if (state.result.bankGatewayUrl.isNotEmpty) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PaymentGatewayScreen(
+                    bankGatewayUrl: state.result.bankGatewayUrl,
+                  ),
+                ));
+              } else {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PaymentReciept(
+                    orderId: state.result.orderId,
+                  ),
+                ));
+              }
             }
           });
           return shippingBloc;
@@ -148,7 +157,16 @@ class _ShippingState extends State<Shipping> {
                         width: 16,
                       ),
                       OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            BlocProvider.of<ShippingBloc>(context).add(
+                                ShippingCreateOrderEvent(CreateOrderParams(
+                                    firstNameController.text,
+                                    lastNameController.text,
+                                    phoneNumberController.text,
+                                    postalCodeController.text,
+                                    addressController.text,
+                                    PaymentMethod.cashOnDelivery)));
+                          },
                           child: state is ShippingLoadingState
                               ? CupertinoActivityIndicator()
                               : Text('پرداخت در محل')),
