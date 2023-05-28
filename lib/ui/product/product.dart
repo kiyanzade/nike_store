@@ -35,7 +35,7 @@ class ProductItem extends StatelessWidget {
               Stack(
                 children: [
                   AspectRatio(
-                    aspectRatio: 1,
+                    aspectRatio: 0.95,
                     child: ImageLoadingService(
                         imageUrl: product.imageUrl,
                         borderRadius: BorderRadius.circular(12)),
@@ -63,7 +63,6 @@ class ProductItem extends StatelessWidget {
                     Text(
                       product.title,
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 4),
                     Text(

@@ -14,6 +14,7 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  int crossAxisCount = 2;
   @override
   void dispose() {
     productListBloc?.close();
@@ -65,8 +66,8 @@ class _ProductListState extends State<ProductList> {
                                   context: context,
                                   builder: (context) {
                                     return Container(
-                                      padding:
-                                          const EdgeInsets.only(right: 16, top: 12),
+                                      padding: const EdgeInsets.only(
+                                          right: 16, top: 12),
                                       height: 250,
                                       child: Column(
                                           crossAxisAlignment:
@@ -146,7 +147,11 @@ class _ProductListState extends State<ProductList> {
                           ),
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                crossAxisCount = crossAxisCount == 2 ? 3 : 2;
+                              });
+                            },
                             icon: const Icon(CupertinoIcons.square_grid_2x2)),
                       ],
                     ),
@@ -154,10 +159,11 @@ class _ProductListState extends State<ProductList> {
                   Expanded(
                     child: GridView.builder(
                       padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 0.65,
-                        crossAxisCount: 2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.54,
+                        // childAspectRatio: 0.50,
+                        // crossAxisSpacing: 0.225,
+                        crossAxisCount: crossAxisCount,
                       ),
                       itemCount: products.length,
                       itemBuilder: (BuildContext context, int index) {
