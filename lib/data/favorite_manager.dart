@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nike_store/data/product.dart';
 
@@ -5,6 +6,10 @@ final FavoritesManager favoritesManager = FavoritesManager();
 
 class FavoritesManager {
   final _box = Hive.box<Product>('favorites');
+
+    ValueListenable<Box<Product>> getValueListenable(){
+      return _box.listenable();
+    }
 
   static init() async {
     await Hive.initFlutter();

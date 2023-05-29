@@ -4,6 +4,7 @@ import 'package:nike_store/data/auth_info.dart';
 import 'package:nike_store/data/repo/auth_repository.dart';
 import 'package:nike_store/data/repo/cart_repository.dart';
 import 'package:nike_store/ui/auth/auth.dart';
+import 'package:nike_store/ui/favorite/favorities_list.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -48,7 +49,11 @@ class ProfileScreen extends StatelessWidget {
                     thickness: 0.5,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => FavoriteListScreen(),
+                      ));
+                    },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
