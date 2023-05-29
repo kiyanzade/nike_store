@@ -1,3 +1,5 @@
+import 'package:nike_store/data/product.dart';
+
 class CreateOrderResult {
   final int orderId;
   final String bankGatewayUrl;
@@ -20,3 +22,14 @@ class CreateOrderParams {
 }
 
 enum PaymentMethod { online, cashOnDelivery }
+
+
+class OrderEntity {
+  final  int id;
+  final int payablePrice;
+  final List<Product> products;
+
+OrderEntity.fromJson(Map <String, dynamic> json):id = json['id'],payablePrice = json['payable'],
+products =(json['order_items'] as List).map((e) => Product.fromJson(e['product'])).toList();
+
+}

@@ -14,14 +14,14 @@ class FavoriteListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('لیست علاقه مندی ها'),
+        title: const Text('لیست علاقه مندی ها'),
       ),
       body: ValueListenableBuilder<Box<Product>>(
         valueListenable: favoritesManager.getValueListenable(),
         builder: (context, box, child) {
           final products = box.values.toList();
           return ListView.builder(
-            padding: EdgeInsets.fromLTRB(0, 16, 0, 100),
+            padding: const EdgeInsets.fromLTRB(0, 16, 0, 100),
             itemCount: products.length,
             itemBuilder: (context, index) {
               final product = products[index];
@@ -46,7 +46,7 @@ class FavoriteListScreen extends StatelessWidget {
                             imageUrl: product.imageUrl,
                             borderRadius: BorderRadius.circular(8)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 14,
                       ),
                       Expanded(
@@ -54,7 +54,7 @@ class FavoriteListScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(product.title),
-                            SizedBox(
+                            const SizedBox(
                               height: 24,
                             ),
                             Text(

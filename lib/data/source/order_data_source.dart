@@ -7,6 +7,7 @@ import '../payment_reciept.dart';
 abstract class IOrderDataSource {
   Future<CreateOrderResult> create(CreateOrderParams params);
   Future<PaymentRecieptData> getPaymentReciept(int orderId);
+  Future<List<OrderEntity>> getOrders();
 }
 
 class OrderRemoteDataSource extends IOrderDataSource {
@@ -33,5 +34,11 @@ class OrderRemoteDataSource extends IOrderDataSource {
   Future<PaymentRecieptData> getPaymentReciept(int orderId) async {
     final response = await httpClient.get('order/checkout?order_id=$orderId');
     return PaymentRecieptData.fromJson(response.data);
+  }
+
+  @override
+  Future<List<OrderEntity>> getOrders() async {
+    final response = await httpClient.get('order/list');
+    return (response.data as List).map((e) => OrderEntity.fromJson(e)).toList();
   }
 }
