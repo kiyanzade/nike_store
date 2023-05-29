@@ -17,8 +17,9 @@ class ImageLoadingService extends StatelessWidget {
       borderRadius: borderRadius,
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        placeholder: (context, url) =>
+            const Center(child: CupertinoActivityIndicator()),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
         fit: BoxFit.cover,
       ),
     );

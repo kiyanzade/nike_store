@@ -23,8 +23,8 @@ class AuthRemoteDataSource implements IAuthDataSource {
       "password": password,
     });
     validateResponse(response);
-    return AuthInfo(
-        response.data["access_token"], response.data["refresh_token"]);
+    return AuthInfo(response.data["access_token"],
+        response.data["refresh_token"], username);
   }
 
   @override
@@ -37,7 +37,7 @@ class AuthRemoteDataSource implements IAuthDataSource {
     });
     validateResponse(response);
     return AuthInfo(
-        response.data["access_token"], response.data["refresh_token"]);
+        response.data["access_token"], response.data["refresh_token"], "");
   }
 
   @override
