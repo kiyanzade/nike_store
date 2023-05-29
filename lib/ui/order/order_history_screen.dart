@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/repo/order_repository.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/order/bloc/order_history_bloc.dart';
+import 'package:nike_store/ui/product/details.dart';
 
 import '../../data/order.dart';
 import '../widgets/imageService.dart';
@@ -73,23 +74,32 @@ class OrderHistoryScreen extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 120,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListView.builder(
-                              itemCount: products.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                final product = products[index];
-                                return Container(
-                                    width: 110,
-                                    height: 120,
-                                    margin: const EdgeInsets.only(right: 4, left: 4),
+                          child: ListView.builder(
+                            padding: const EdgeInsets.only(right: 8, left: 8),
+                            itemCount: products.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final product = products[index];
+                              return Container(
+                                  width: 120,
+                                  height: 120,
+                                  margin: const EdgeInsets.only(
+                                      right: 4, left: 4, top: 8, bottom: 8),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetailsScreen(
+                                                product: product),
+                                      ));
+                                    },
                                     child: ImageLoadingService(
                                       imageUrl: product.imageUrl,
                                       borderRadius: BorderRadius.circular(8),
-                                    ));
-                              },
-                            ),
+                                    ),
+                                  ));
+                            },
                           ),
                         )
                       ],
