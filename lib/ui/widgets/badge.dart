@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class BadgeWidget extends StatelessWidget {
   final int value;
@@ -16,7 +17,7 @@ class BadgeWidget extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             shape: BoxShape.circle),
         child: Text(
-          value.toString(),
+          value.toString().toPersianDigit(),
           style: TextStyle(
               color: Theme.of(context).colorScheme.onPrimary, fontSize: 12),
         ),

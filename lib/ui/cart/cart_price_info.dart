@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class PriceInfo extends StatelessWidget {
   final int payablePrice;
@@ -80,7 +81,7 @@ class PriceInfo extends StatelessWidget {
                     Text('مبلغ قابل پرداخت'),
                     RichText(
                       text: TextSpan(
-                          text: payablePrice.separateByComma,
+                          text: payablePrice.separateByComma.toPersianDigit(),
                           style: Theme.of(context)
                               .textTheme
                               .headline6!

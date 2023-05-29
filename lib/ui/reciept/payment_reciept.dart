@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/repo/order_repository.dart';
 import 'package:nike_store/ui/home/home.dart';
+import 'package:nike_store/ui/order/order_history_screen.dart';
 import 'package:nike_store/ui/reciept/bloc/payment_reciept_bloc.dart';
 import 'package:nike_store/ui/shipping/shipping.dart';
 
@@ -75,7 +76,15 @@ class PaymentReciept extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       OutlinedButton(
-                          onPressed: () {}, child: const Text('سوابق سفارش')),
+                          onPressed: () {
+                            Navigator.of(context)
+                              ..popUntil((route) => route.isFirst)
+                              ..push(MaterialPageRoute(
+                                builder: (context) =>
+                                    const OrderHistoryScreen(),
+                              ));
+                          },
+                          child: const Text('سوابق سفارش')),
                       const SizedBox(
                         width: 12,
                       ),
