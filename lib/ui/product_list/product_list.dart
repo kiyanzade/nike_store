@@ -161,8 +161,6 @@ class _ProductListState extends State<ProductList> {
                       padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 0.54,
-                        // childAspectRatio: 0.50,
-                        // crossAxisSpacing: 0.225,
                         crossAxisCount: crossAxisCount,
                       ),
                       itemCount: products.length,
