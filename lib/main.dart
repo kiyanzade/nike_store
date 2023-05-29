@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nike_store/data/favorite_manager.dart';
 import 'package:nike_store/data/product.dart';
 import 'package:nike_store/data/repo/auth_repository.dart';
 import 'package:nike_store/data/repo/banner_repository.dart';
@@ -9,6 +10,7 @@ import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/root.dart';
 
 void main() {
+  FavoritesManager.init();
   WidgetsFlutterBinding.ensureInitialized();
   authRepository.loadAuthToken();
   runApp(const MyApp());
