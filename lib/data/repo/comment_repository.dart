@@ -8,6 +8,7 @@ final CommentRepository commentRepository =
 
 abstract class ICommentRepository {
   Future<List<Comment>> getAll({required int productId});
+  Future<Comment> insert(String title, String content, int productId);
 }
 
 class CommentRepository implements ICommentRepository {
@@ -17,5 +18,10 @@ class CommentRepository implements ICommentRepository {
   @override
   Future<List<Comment>> getAll({required int productId}) {
     return commentDataSource.getAll(productId: productId);
+  }
+
+  @override
+  Future<Comment> insert(String title, String content, int productId) {
+    return commentDataSource.insert(title, content, productId);
   }
 }

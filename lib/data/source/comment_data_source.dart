@@ -5,6 +5,7 @@ import '../comment.dart';
 
 abstract class ICommentDataSource {
   Future<List<Comment>> getAll({required int productId});
+  Future<Comment> insert(String title, String content, int productId);
 }
 
 class CommentRemoteDataSource implements ICommentDataSource {
@@ -26,5 +27,16 @@ class CommentRemoteDataSource implements ICommentDataSource {
     if (response.statusCode != 200) {
       throw AppException();
     }
+  }
+
+  @override
+  Future<Comment> insert(String title, String content, int productId) async {
+    final response = await httpClient.post('comment/add', data: {
+      'title': title,
+      'content': content,
+      'product_id': productId,
+    });
+    validateResponse(response);
+    return Comment.fromJson(response.data);
   }
 }

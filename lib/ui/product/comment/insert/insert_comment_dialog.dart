@@ -24,7 +24,7 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
               "ثبت نظر",
               style: Theme.of(context).textTheme.headline6,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextField(
@@ -33,7 +33,7 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
                 label: Text("عنوان"),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             TextField(
@@ -42,13 +42,18 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
                 label: Text("متن نظر خود را اینجا وارد کنید"),
               ),
             ),
-            SizedBox(
-              height: 10,
+            const SizedBox(
+              height: 16,
             ),
             SizedBox(
-                width: MediaQuery.of(context).size.width - 200,
-                child: ElevatedButton(
-                    onPressed: () {}, child: const Text('ذخیره'))),
+              width: MediaQuery.of(context).size.width-100,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text('ذخیره'),
+                style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(Size.fromHeight(56))),
+              ),
+            ),
           ],
         ),
       ),
