@@ -46,7 +46,35 @@ class HomeScreen extends StatelessWidget {
                               height: 24,
                             ),
                           );
-
+                        case 1:
+                          return Container(
+                            height: 56,
+                            margin: EdgeInsets.fromLTRB(12, 0, 12, 12),
+                            child: TextField(
+                              style: Theme.of(context).textTheme.bodyText2,
+                              textInputAction: TextInputAction.search,
+                              decoration: InputDecoration(
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(28),
+                                      borderSide: BorderSide(
+                                          width: 2,
+                                          color:
+                                              Theme.of(context).primaryColor)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(28),
+                                      borderSide: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Theme.of(context).dividerColor)),
+                                  label: Text('جستجو'),
+                                  isCollapsed: false,
+                                  prefixIcon: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(CupertinoIcons.search))),
+                            ),
+                          );
                         case 2:
                           return BannerSlider(
                             banners: state.banners,
