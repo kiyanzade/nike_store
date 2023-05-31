@@ -9,6 +9,7 @@ import 'package:nike_store/theme.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/product/bloc/product_bloc.dart';
 import 'package:nike_store/ui/product/comment/comment_list.dart';
+import 'package:nike_store/ui/product/comment/insert/insert_comment_dialog.dart';
 import 'package:nike_store/ui/widgets/imageService.dart';
 
 import '../../data/product.dart';
@@ -52,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         child: Scaffold(
           floatingActionButton: SizedBox(
             width: MediaQuery.of(context).size.width - 48,
-            child: BlocBuilder<ProductBloc,ProductState>(
+            child: BlocBuilder<ProductBloc, ProductState>(
               builder: (BuildContext context, state) {
                 return FloatingActionButton.extended(
                     onPressed: () {
@@ -119,7 +120,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             'نظرات کاربران',
                             style: Theme.of(context).textTheme.subtitle1,
                           ),
-                          TextButton(onPressed: () {}, child: Text('ثبت نظر'))
+                          TextButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(32),
+                                          topLeft: Radius.circular(32))),
+                                  context: context,
+                                  useRootNavigator: true,
+                                  builder: (context) {
+                                    return Directionality(
+                                        textDirection: TextDirection.rtl,
+                                        child: InsertCommentDialog());
+                                  },
+                                );
+                              },
+                              child: Text('ثبت نظر'))
                         ]),
                   ]),
                 ),
