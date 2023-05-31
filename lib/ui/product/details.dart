@@ -132,7 +132,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   builder: (context) {
                                     return Directionality(
                                         textDirection: TextDirection.rtl,
-                                        child: InsertCommentDialog());
+                                        child: InsertCommentDialog(
+                                          productId: widget.product.id,
+                                        ));
                                   },
                                 );
                               },
