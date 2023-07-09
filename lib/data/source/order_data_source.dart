@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nike_store/data/order.dart';
-import 'package:nike_store/ui/reciept/payment_reciept.dart';
+
 
 import '../payment_reciept.dart';
 

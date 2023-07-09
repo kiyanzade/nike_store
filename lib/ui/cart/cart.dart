@@ -4,15 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nike_store/data/auth_info.dart';
-import 'package:nike_store/data/cart_itam.dart';
+
+
 import 'package:nike_store/data/repo/cart_repository.dart';
 import 'package:nike_store/ui/cart/bloc/cart_bloc.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
-import 'package:nike_store/ui/home/home.dart';
+
 import 'package:nike_store/ui/shipping/shipping.dart';
 import 'package:nike_store/ui/widgets/emptyScreen.dart';
-import 'package:nike_store/ui/widgets/imageService.dart';
+
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../data/repo/auth_repository.dart';

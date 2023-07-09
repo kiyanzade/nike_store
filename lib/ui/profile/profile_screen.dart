@@ -52,17 +52,17 @@ class ProfileScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => FavoriteListScreen(),
+                        builder: (context) => const FavoriteListScreen(),
                       ));
                     },
-                    child: Row(
+                    child: const Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Icon(CupertinoIcons.heart),
-                        const SizedBox(
+                        Icon(CupertinoIcons.heart),
+                        SizedBox(
                           width: 16,
                         ),
-                        const Text('لیست علاقه‌مندی ها'),
+                        Text('لیست علاقه‌مندی ها'),
                       ],
                     ),
                   ),
@@ -73,11 +73,11 @@ class ProfileScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OrderHistoryScreen(),
+                        builder: (context) => const OrderHistoryScreen(),
                       ));
                     },
-                    child: Row(
-                      children: const [
+                    child: const Row(
+                      children: [
                         Icon(CupertinoIcons.cart),
                         SizedBox(
                           width: 16,

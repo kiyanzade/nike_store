@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:nike_store/data/source/product_data_source.dart';
 
 import '../../common/http_client.dart';

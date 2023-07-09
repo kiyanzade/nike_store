@@ -5,8 +5,7 @@ import 'package:nike_store/data/repo/auth_repository.dart';
 import 'package:nike_store/data/repo/banner_repository.dart';
 import 'package:nike_store/data/repo/product_repository.dart';
 import 'package:nike_store/theme.dart';
-import 'package:nike_store/ui/auth/auth.dart';
-import 'package:nike_store/ui/home/home.dart';
+
 import 'package:nike_store/ui/root.dart';
 
 void main() {
@@ -49,9 +48,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         scaffoldBackgroundColor: Colors.white,
         hintColor: LightThemeColors.scondaryTextColor,
-        inputDecorationTheme:
-            InputDecorationTheme(border: OutlineInputBorder(),
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: LightThemeColors.primaryTextColor.withOpacity(0.1)))),
+        inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color:
+                        LightThemeColors.primaryTextColor.withOpacity(0.1)))),
         appBarTheme: AppBarTheme(
             elevation: 0,
             color: Colors.white,

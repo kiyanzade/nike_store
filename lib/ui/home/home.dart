@@ -6,14 +6,14 @@ import 'package:nike_store/ui/home/bloc/home_bloc.dart';
 import 'package:nike_store/ui/product_list/product_list.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
-import '../../common/exceptions.dart';
+
 import '../../data/product.dart';
 import '../../data/repo/banner_repository.dart';
 import '../../data/repo/product_repository.dart';
 import '../product/product.dart';
 import '../widgets/bannerSlider.dart';
 import '../widgets/errorRefresh.dart';
-import '../widgets/imageService.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

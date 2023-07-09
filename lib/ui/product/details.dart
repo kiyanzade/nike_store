@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/repo/cart_repository.dart';
-import 'package:nike_store/data/repo/product_repository.dart';
+
 import 'package:nike_store/theme.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/product/bloc/product_bloc.dart';

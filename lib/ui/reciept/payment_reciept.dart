@@ -5,7 +5,6 @@ import 'package:nike_store/data/repo/order_repository.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/order/order_history_screen.dart';
 import 'package:nike_store/ui/reciept/bloc/payment_reciept_bloc.dart';
-import 'package:nike_store/ui/shipping/shipping.dart';
 
 class PaymentReciept extends StatelessWidget {
   final int orderId;
