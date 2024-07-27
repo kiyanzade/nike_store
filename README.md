@@ -1,16 +1,15 @@
-# nike_store
+# Nike Store
 
-A new Flutter project.
+## Overview
+Nike Store is a store application developed using Flutter. This application showcases a complete shopping experience, featuring seamless API integration and state management using Bloc.
 
-## Getting Started
+## Features
+- **User Authentication:** Sign up, sign in, and manage user sessions.
+- **Product Listings:** Browse and search for products with detailed descriptions and images.
+- **Product Details:** View detailed information about each product, including images, price, and specifications.
+- **Shopping Cart:** Add, remove, and manage products in the shopping cart.
+- **Checkout Process:** Complete the purchase with a smooth checkout flow.
+- **Order History:** View past orders and their details.
+- **Profile Management:** Manage user profile information and settings.
+- and more.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
