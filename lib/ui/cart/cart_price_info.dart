@@ -21,11 +21,11 @@ class PriceInfo extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 8, 16, 0),
           child: Text(
             'جزئیات خرید',
-            style: Theme.of(context).textTheme.caption!.copyWith(fontSize: 16),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 16),
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(8, 4, 8, 16),
+          margin: const EdgeInsets.fromLTRB(8, 4, 8, 16),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(2),
@@ -42,12 +42,12 @@ class PriceInfo extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('مبلغ کل خرید'),
+                    const Text('مبلغ کل خرید'),
                     Text(
                       totalPrice.withPriceLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .caption!
+                          .bodySmall!
                           .copyWith(fontSize: 14),
                     ),
                   ],
@@ -59,14 +59,14 @@ class PriceInfo extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('هزینه ارسال'),
+                    const Text('هزینه ارسال'),
                     Text(
                       shippingPrice == 0
                           ? 'رایگان'
                           : shippingPrice.withPriceLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .headline6!
+                          .titleLarge!
                           .copyWith(fontSize: 14),
                     ),
                   ],
@@ -78,15 +78,15 @@ class PriceInfo extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('مبلغ قابل پرداخت'),
+                    const Text('مبلغ قابل پرداخت'),
                     RichText(
                       text: TextSpan(
                           text: payablePrice.separateByComma.toPersianDigit(),
                           style: Theme.of(context)
                               .textTheme
-                              .headline6!
+                              .titleLarge!
                               .copyWith(fontSize: 18),
-                          children: [
+                          children: const [
                             TextSpan(
                               text: ' تومان',
                               style: TextStyle(

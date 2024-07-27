@@ -25,16 +25,16 @@ class _AuthScreenState extends State<AuthScreen> {
         data: themeData.copyWith(
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                shape: MaterialStateProperty.all(
+                shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.all(Colors.white),
+                backgroundColor: WidgetStateProperty.all(Colors.white),
                 foregroundColor:
-                    MaterialStateProperty.all(themeData.colorScheme.secondary),
+                    WidgetStateProperty.all(themeData.colorScheme.secondary),
                 minimumSize:
-                    MaterialStateProperty.all(const Size.fromHeight(56)),
+                    WidgetStateProperty.all(const Size.fromHeight(56)),
               ),
             ),
             colorScheme: themeData.colorScheme.copyWith(
@@ -48,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
               // inputDecorationTheme: InputDecorationTheme(labelStyle: TextStyle(color: Colors.white)),
             ),
-            snackBarTheme: SnackBarThemeData(
+            snackBarTheme: const SnackBarThemeData(
                 contentTextStyle:
                     TextStyle(color: Colors.black, fontFamily: 'Vazir'))),
         child: Scaffold(
@@ -59,9 +59,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 authRepository, cartRepository
               );
               authBloc.stream.forEach((state) {
-                if (state is AuthSuccessState)
+                if (state is AuthSuccessState) {
                   Navigator.of(context).pop();
-                else if (state is AuthErrorState) {
+                } else if (state is AuthErrorState) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.appException.message)));
                 }
@@ -178,7 +178,6 @@ class _AuthScreenState extends State<AuthScreen> {
 class _PasswordWidget extends StatefulWidget {
   final TextEditingController passwordController;
   const _PasswordWidget({
-    super.key,
     required this.passwordController,
   });
 

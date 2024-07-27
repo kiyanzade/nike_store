@@ -17,9 +17,9 @@ class CommentRemoteDataSource implements ICommentDataSource {
     final response = await httpClient.get('comment/list?product_id=$productId');
     validateResponse(response);
     final List<Comment> comments = [];
-    (response.data as List).forEach((json) {
+    for (var json in (response.data as List)) {
       comments.add(Comment.fromJson(json));
-    });
+    }
     return comments;
   }
 

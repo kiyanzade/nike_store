@@ -23,6 +23,6 @@ class HomeSuccessState extends HomeState {
   final List<BannerEntity> banners;
   final List<Product> popularProducts;
 
-  HomeSuccessState({required this.latestProducts, required this.banners, required this.popularProducts});
+  const HomeSuccessState({required this.latestProducts, required this.banners, required this.popularProducts});
 
 }

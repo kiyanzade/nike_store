@@ -18,9 +18,9 @@ final Dio httpClient;
     final response =await httpClient.get('product/list?sort=$sort');
     validateResponse(response);
     final products =<Product> [];
-    (response.data as List).forEach((element) {
+    for (var element in (response.data as List)) {
       products.add(Product.fromJson(element));
-    });
+    }
     return products;
   }
 
@@ -29,9 +29,9 @@ final Dio httpClient;
     final response =await httpClient.get('product/search?q=$searchTerm');
     validateResponse(response);
     final products =<Product> [];
-    (response.data as List).forEach((jsonObj) {
+    for (var jsonObj in (response.data as List)) {
       products.add(Product.fromJson(jsonObj));
-    });
+    }
     return products;
   }
 

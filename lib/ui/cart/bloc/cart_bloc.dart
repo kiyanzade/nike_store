@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/common/exceptions.dart';
 import 'package:nike_store/data/auth_info.dart';
@@ -53,7 +54,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               emit(calculatePriceInfo(successState.cartResponse));
             }
           }
-        } catch (e) {}
+        } catch (e) {
+          debugPrint(e.toString());
+        }
       } else if (event is CartAuthInfoChangedEvent) {
         if (event.authInfo == null || event.authInfo!.accessToken.isEmpty) {
           emit(CartAuthRequiredState());
@@ -87,7 +90,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
             emit(calculatePriceInfo(successState.cartResponse));
           }
-        } catch (e) {}
+        } catch (e) {
+          debugPrint(e.toString());
+        }
       } else if (event is CartMinusCountButtonClickedEvent) {
         try {
           if (state is CartSuccessState) {
@@ -107,7 +112,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
             emit(calculatePriceInfo(successState.cartResponse));
           }
-        } catch (e) {}
+        } catch (e) {   debugPrint(e.toString());}
       }
     });
   }
@@ -117,10 +122,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     int shippingPrice = 0;
     int payablePrice = 0;
 
-    cartResponse.cartItems.forEach((cartItem) {
+    for (var cartItem in cartResponse.cartItems) {
       totalPrice += cartItem.product.previousPrice * cartItem.count;
       payablePrice += cartItem.product.price * cartItem.count;
-    });
+    }
 
     shippingPrice = payablePrice >= 250000 ? 0 : 30000;
 

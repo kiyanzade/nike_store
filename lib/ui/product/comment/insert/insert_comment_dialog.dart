@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/ui/product/comment/insert/bloc/insert_commnet_bloc.dart';
 
@@ -50,7 +49,7 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
-        child: Container(
+        child: SizedBox(
           height: 900,
           child: BlocBuilder<InsertCommnetBloc, InsertCommnetState>(
             builder: (context, state) {
@@ -58,7 +57,7 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
                 children: [
                   Text(
                     "ثبت نظر",
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 20,
@@ -89,12 +88,12 @@ class _InsertCommentDialogState extends State<InsertCommentDialog> {
                             InsertCommnetSubmittedEvent(_labelController.text,
                                 _contentController.text, widget.productId));
                       },
-                      child: state is InsertCommnetLoading
-                          ? CupertinoActivityIndicator()
-                          : Text('ذخیره'),
                       style: ButtonStyle(
                           minimumSize:
-                              MaterialStateProperty.all(Size.fromHeight(56))),
+                              WidgetStateProperty.all(const Size.fromHeight(56))),
+                      child: state is InsertCommnetLoading
+                          ? const CupertinoActivityIndicator()
+                          : const Text('ذخیره'),
                     ),
                   ),
                 ],

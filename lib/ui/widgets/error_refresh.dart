@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/exceptions.dart';
@@ -15,11 +14,15 @@ class AppErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(exception.message),
-        TextButton(onPressed: onPressed, child: Text('تلاش مجدد'))
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        
+        children: [
+          Text(exception.message),
+          TextButton(onPressed: onPressed, child: const Text('تلاش مجدد'))
+        ],
+      ),
     );
   }
 }

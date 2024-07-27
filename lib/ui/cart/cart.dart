@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,13 +9,13 @@ import 'package:nike_store/ui/cart/bloc/cart_bloc.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
 
 import 'package:nike_store/ui/shipping/shipping.dart';
-import 'package:nike_store/ui/widgets/emptyScreen.dart';
+import 'package:nike_store/ui/widgets/empty_screen.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../data/repo/auth_repository.dart';
 import '../auth/auth.dart';
-import '../widgets/cartItem.dart';
+import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -60,7 +58,7 @@ class _CartScreenState extends State<CartScreen> {
         visible: stateIsSuccsed,
         child: Container(
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.only(left: 32, right: 32),
+          margin: const EdgeInsets.only(left: 32, right: 32),
           child: FloatingActionButton.extended(
             onPressed: () {
               final state = cartBloc!.state;
@@ -73,7 +71,7 @@ class _CartScreenState extends State<CartScreen> {
                 ));
               }
             },
-            label: Text('پرداخت'),
+            label: const Text('پرداخت'),
           ),
         ),
       ),
@@ -120,7 +118,7 @@ class _CartScreenState extends State<CartScreen> {
                       AuthRepository.authChangeNotifier.value));
                 },
                 child: ListView.builder(
-                  padding: EdgeInsets.only(bottom: 80),
+                  padding: const EdgeInsets.only(bottom: 80),
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     if (index == state.cartResponse.cartItems.length) {

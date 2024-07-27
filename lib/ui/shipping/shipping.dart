@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/data/order.dart';
 import 'package:nike_store/ui/cart/cart_price_info.dart';
-import 'package:nike_store/ui/payment_webView.dart';
+import 'package:nike_store/ui/payment_web_view.dart';
 import 'package:nike_store/ui/reciept/payment_reciept.dart';
 import 'package:nike_store/ui/shipping/bloc/shipping_bloc.dart';
 
@@ -16,7 +16,7 @@ class Shipping extends StatefulWidget {
   final int shippingPrice;
   final int totalPrice;
 
-  Shipping(
+  const Shipping(
       {super.key,
       required this.payablePrice,
       required this.shippingPrice,
@@ -151,8 +151,8 @@ class _ShippingState extends State<Shipping> {
                                     PaymentMethod.online)));
                           },
                           child: state is ShippingLoadingState
-                              ? CupertinoActivityIndicator()
-                              : Text('پرداخت اینترنتی')),
+                              ? const CupertinoActivityIndicator()
+                              : const Text('پرداخت اینترنتی')),
                       const SizedBox(
                         width: 16,
                       ),
@@ -168,8 +168,8 @@ class _ShippingState extends State<Shipping> {
                                     PaymentMethod.cashOnDelivery)));
                           },
                           child: state is ShippingLoadingState
-                              ? CupertinoActivityIndicator()
-                              : Text('پرداخت در محل')),
+                              ? const CupertinoActivityIndicator()
+                              : const Text('پرداخت در محل')),
                     ],
                   );
                 },

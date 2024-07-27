@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../data/banner.dart';
-import 'imageService.dart';
+import 'image_service.dart';
 
 class BannerSlider extends StatelessWidget {
   final List<BannerEntity> banners;
@@ -20,7 +20,7 @@ class BannerSlider extends StatelessWidget {
       child: Stack(
         children: [
           PageView.builder(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             controller: _controller,
             itemCount: banners.length,
             itemBuilder: (BuildContext context, int index) {
@@ -46,7 +46,7 @@ class BannerSlider extends StatelessWidget {
                     paintStyle: PaintingStyle.fill,
                     strokeWidth: 1.5,
                     dotColor: Colors.grey.shade400,
-                    activeDotColor: Theme.of(context).colorScheme.onBackground),
+                    activeDotColor: Theme.of(context).colorScheme.onSurface),
               ),
             ),
           )
@@ -58,7 +58,6 @@ class BannerSlider extends StatelessWidget {
 
 class _Slide extends StatelessWidget {
   const _Slide({
-    super.key,
     required this.banner,
   });
 
@@ -67,7 +66,7 @@ class _Slide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 12, left: 12),
+      padding: const EdgeInsets.only(right: 12, left: 12),
       child: ImageLoadingService(
         imageUrl: banner.imageUrl,
         borderRadius: BorderRadius.circular(12),

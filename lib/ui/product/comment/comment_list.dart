@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nike_store/ui/product/comment/bloc/comment_list_bloc.dart';
-import 'package:nike_store/ui/widgets/errorRefresh.dart';
+import 'package:nike_store/ui/widgets/error_refresh.dart';
 
 import '../../../data/comment.dart';
 import '../../../data/repo/comment_repository.dart';
@@ -31,7 +31,7 @@ class CommentList extends StatelessWidget {
               }, childCount: state.comments.length),
             );
           } else if (state is CommentListLoadingState) {
-            return SliverToBoxAdapter(
+            return const SliverToBoxAdapter(
               child: Center(child: CircularProgressIndicator()),
             );
           } else if (state is CommentListErrorState) {
@@ -64,8 +64,8 @@ class CommentItem extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).dividerColor, width: 1),
           borderRadius: BorderRadius.circular(4)),
-      padding: EdgeInsets.all(12),
-      margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
+      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -78,16 +78,16 @@ class CommentItem extends StatelessWidget {
                 children: [
                   Text(comment.title),
                   Text(comment.email,
-                      style: Theme.of(context).textTheme.caption),
+                      style: Theme.of(context).textTheme.bodySmall),
                 ],
               ),
               Text(
                 comment.date,
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Text(comment.content),

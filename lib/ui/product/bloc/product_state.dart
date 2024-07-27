@@ -14,7 +14,7 @@ class ProductAddtoCartButtonLoadingState extends ProductState {}
 class ProductAddToCartErrorState extends ProductState {
   final AppException appException;
 
-  ProductAddToCartErrorState(this.appException);
+  const ProductAddToCartErrorState(this.appException);
 
   @override
   List<Object> get props => [appException];

@@ -8,7 +8,7 @@ import 'package:nike_store/ui/order/bloc/order_history_bloc.dart';
 import 'package:nike_store/ui/product/details.dart';
 
 
-import '../widgets/imageService.dart';
+import '../widgets/image_service.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
   const OrderHistoryScreen({
@@ -111,6 +111,7 @@ class OrderHistoryScreen extends StatelessWidget {
             } else if (state is OrderHistoryLoadingState) {
               return const Center(child: CupertinoActivityIndicator());
             } else
+              // ignore: curly_braces_in_flow_control_structures
               throw Exception('state is not supported');
           },
         ),

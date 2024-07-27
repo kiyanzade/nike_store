@@ -21,9 +21,9 @@ class _RootScreenState extends State<RootScreen> {
   int selectedScreenIndex = homeIndex;
   final List<int> _history = [];
 
-  GlobalKey<NavigatorState> _homeKey = GlobalKey();
-  GlobalKey<NavigatorState> _cartKey = GlobalKey();
-  GlobalKey<NavigatorState> _profileKey = GlobalKey();
+  final GlobalKey<NavigatorState> _homeKey = GlobalKey();
+  final GlobalKey<NavigatorState> _cartKey = GlobalKey();
+  final GlobalKey<NavigatorState> _profileKey = GlobalKey();
 
   late final map = {
     homeIndex: _homeKey,
@@ -49,6 +49,7 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
@@ -62,7 +63,7 @@ class _RootScreenState extends State<RootScreen> {
             _navigator(
               _profileKey,
               profileIndex,
-              ProfileScreen(),
+              const ProfileScreen(),
             )
           ]),
           bottomNavigationBar: BottomNavigationBar(

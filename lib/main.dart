@@ -21,64 +21,51 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    productRepository.getAll(ProductSort.latest).then((value) {
-      print(value.toString());
-    }).catchError((e) {
-      print(e.toString());
-    });
+    productRepository
+        .getAll(ProductSort.latest)
+        .then((value) {})
+        .catchError((e) {});
 
-    bannerRepository.getAll().then((value) {
-      print(value.toString());
-    }).catchError((e) {
-      print(e.toString);
-    });
+    bannerRepository.getAll().then((value) {}).catchError((e) {});
     const defaultTextStyle = TextStyle(
         fontFamily: 'Vazir', color: LightThemeColors.primaryTextColor);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         scaffoldBackgroundColor: Colors.white,
         hintColor: LightThemeColors.scondaryTextColor,
         inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color:
-                        LightThemeColors.primaryTextColor.withOpacity(0.1)))),
-        appBarTheme: AppBarTheme(
+          border: const OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: LightThemeColors.primaryTextColor.withOpacity(0.1)),
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
             elevation: 0,
             color: Colors.white,
             foregroundColor: LightThemeColors.primaryTextColor),
         snackBarTheme: SnackBarThemeData(
             contentTextStyle: defaultTextStyle.apply(color: Colors.white)),
         textTheme: TextTheme(
-          subtitle1:
+          titleMedium:
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
-          button: defaultTextStyle,
-          bodyText2: defaultTextStyle,
-          headline6: defaultTextStyle.copyWith(
+          labelLarge: defaultTextStyle,
+          bodyMedium: defaultTextStyle,
+          titleLarge: defaultTextStyle.copyWith(
               fontWeight: FontWeight.bold, fontSize: 18),
-          caption:
+          bodySmall:
               defaultTextStyle.apply(color: LightThemeColors.scondaryTextColor),
         ),
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: LightThemeColors.primaryColor,
           secondary: LightThemeColors.secondaryColor,
           onSecondary: Colors.white,
         ),
       ),
-      home: Directionality(
+      home: const Directionality(
         textDirection: TextDirection.rtl,
-        child: const RootScreen(),
+        child: RootScreen(),
       ),
     );
   }

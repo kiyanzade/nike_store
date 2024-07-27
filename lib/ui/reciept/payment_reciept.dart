@@ -37,7 +37,7 @@ class PaymentReciept extends StatelessWidget {
                             state.data.purchaseSuccess
                                 ? "پرداخت با موفقیت انجام شد"
                                 : "پرداخت ناموفق",
-                            style: Theme.of(context).textTheme.headline6!.apply(
+                            style: Theme.of(context).textTheme.titleLarge!.apply(
                                 color: Theme.of(context).colorScheme.primary)),
                         const SizedBox(
                           height: 32,
@@ -47,9 +47,9 @@ class PaymentReciept extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("وضعیت سفارش",
-                                  style: Theme.of(context).textTheme.subtitle1),
+                                  style: Theme.of(context).textTheme.titleMedium),
                               Text(state.data.paymentStatus,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
                             ]),
@@ -62,9 +62,9 @@ class PaymentReciept extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("مبلغ",
-                                  style: Theme.of(context).textTheme.subtitle1),
+                                  style: Theme.of(context).textTheme.titleMedium),
                               Text(state.data.payablePrice.withPriceLabel,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
                             ]),

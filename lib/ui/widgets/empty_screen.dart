@@ -22,7 +22,7 @@ class EmptyScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(48, 24, 48, 24),
           child: Text(
             message,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
         ),

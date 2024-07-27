@@ -11,8 +11,8 @@ import '../../data/product.dart';
 import '../../data/repo/banner_repository.dart';
 import '../../data/repo/product_repository.dart';
 import '../product/product.dart';
-import '../widgets/bannerSlider.dart';
-import '../widgets/errorRefresh.dart';
+import '../widgets/banner_slider.dart';
+import '../widgets/error_refresh.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -49,9 +49,9 @@ class HomeScreen extends StatelessWidget {
                         case 1:
                           return Container(
                             height: 56,
-                            margin: EdgeInsets.fromLTRB(12, 0, 12, 12),
+                            margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
                             child: TextField(
-                              style: Theme.of(context).textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyMedium,
                               textInputAction: TextInputAction.search,
                               decoration: InputDecoration(
                                   floatingLabelBehavior:
@@ -68,11 +68,11 @@ class HomeScreen extends StatelessWidget {
                                           width: 1,
                                           color:
                                               Theme.of(context).dividerColor)),
-                                  label: Text('جستجو'),
+                                  label: const Text('جستجو'),
                                   isCollapsed: false,
                                   prefixIcon: IconButton(
                                       onPressed: () {},
-                                      icon: Icon(CupertinoIcons.search))),
+                                      icon: const Icon(CupertinoIcons.search))),
                             ),
                           );
                         case 2:
@@ -115,6 +115,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 );
               } else
+                // ignore: curly_braces_in_flow_control_structures
                 throw Exception('state is not supported');
             },
           ),
@@ -129,7 +130,6 @@ class _HorizontalProductList extends StatelessWidget {
   final Function() onTap;
   final List<Product> products;
   const _HorizontalProductList({
-    super.key,
     required this.title,
     required this.onTap,
     required this.products,
@@ -145,7 +145,7 @@ class _HorizontalProductList extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
               title,
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             TextButton(
               onPressed: onTap,

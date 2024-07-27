@@ -77,7 +77,7 @@ class _ProductListState extends State<ProductList> {
                                               'انتخاب مرتب سازی',
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .headline6,
+                                                  .titleLarge,
                                             ),
                                             Expanded(
                                               child: ListView.builder(
@@ -137,7 +137,7 @@ class _ProductListState extends State<ProductList> {
                                       Text(
                                         state.sortNames[state.sort],
                                         style:
-                                            Theme.of(context).textTheme.caption,
+                                            Theme.of(context).textTheme.bodySmall,
                                       ),
                                     ],
                                   ),

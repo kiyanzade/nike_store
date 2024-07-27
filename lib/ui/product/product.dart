@@ -5,7 +5,7 @@ import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/product/details.dart';
 
 import '../../data/product.dart';
-import '../widgets/imageService.dart';
+import '../widgets/image_service.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({
@@ -63,14 +63,14 @@ class _ProductItemState extends State<ProductItem> {
                         width: 32,
                         height: 32,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.white),
                         child: favoritesManager.isFavorites(widget.product)
-                            ? Icon(
+                            ? const Icon(
                                 CupertinoIcons.heart_fill,
                                 color: Colors.red,
                               )
-                            : Icon(CupertinoIcons.heart),
+                            : const Icon(CupertinoIcons.heart),
                       ),
                     ),
                   )
@@ -81,17 +81,17 @@ class _ProductItemState extends State<ProductItem> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Text(
                       widget.product.title,
                       maxLines: 2,
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       widget.product.previousPrice.withPriceLabel,
                       style: Theme.of(context)
                           .textTheme
-                          .caption!
+                          .bodySmall!
                           .copyWith(decoration: TextDecoration.lineThrough),
                     ),
                     Text(widget.product.price.withPriceLabel),

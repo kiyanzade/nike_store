@@ -10,5 +10,5 @@ abstract class ProductEvent extends Equatable {
 class CartAddButtonClickEvent extends ProductEvent {
   final int productId;
 
-  CartAddButtonClickEvent(this.productId);
+  const CartAddButtonClickEvent(this.productId);
 }

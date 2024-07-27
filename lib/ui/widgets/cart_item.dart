@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nike_store/ui/home/home.dart';
 
 import '../../data/cart_itam.dart';
-import 'imageService.dart';
+import 'image_service.dart';
 
 class CartItemWidget extends StatelessWidget {
   const CartItemWidget({
@@ -64,7 +64,7 @@ class CartItemWidget extends StatelessWidget {
                   children: [
                     Text(
                       'تعداد',
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                     Row(
                       children: [
@@ -72,10 +72,10 @@ class CartItemWidget extends StatelessWidget {
                             onPressed: onPlusButtonTapped,
                             icon: const Icon(CupertinoIcons.plus_rectangle)),
                         cartItem.changeCountLoading
-                            ? CupertinoActivityIndicator()
+                            ? const CupertinoActivityIndicator()
                             : Text(
                                 cartItem.count.toString(),
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                         IconButton(
                             onPressed: onMinusButtonTapped,
@@ -89,7 +89,7 @@ class CartItemWidget extends StatelessWidget {
                     cartItem.product.previousPrice.withPriceLabel,
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(decoration: TextDecoration.lineThrough),
                   ),
                   Text(cartItem.product.price.withPriceLabel),
@@ -103,8 +103,8 @@ class CartItemWidget extends StatelessWidget {
           TextButton(
               onPressed: onDeleteButtonTapped,
               child: cartItem.deleteButtonLoading
-                  ? Center(child: CupertinoActivityIndicator())
-                  : Text('حذف از سبد خرید')),
+                  ? const Center(child: CupertinoActivityIndicator())
+                  : const Text('حذف از سبد خرید')),
         ],
       ),
     );

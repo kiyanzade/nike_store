@@ -16,9 +16,9 @@ class BannerRemoteDataSource implements IBannerDataSource {
     final response = await httpClient.get('banner/slider');
     validateResponse(response);
     final banners = <BannerEntity>[];
-    (response.data as List).forEach((jsonObj) {
+    for (var jsonObj in (response.data as List)) {
       banners.add(BannerEntity.fromJSON(jsonObj));
-    });
+    }
     return banners;
   }
 

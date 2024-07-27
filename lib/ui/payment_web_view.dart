@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+
 
 class PaymentGatewayScreen extends StatelessWidget{
   final String bankGatewayUrl;

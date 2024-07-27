@@ -10,7 +10,7 @@ import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/product/bloc/product_bloc.dart';
 import 'package:nike_store/ui/product/comment/comment_list.dart';
 import 'package:nike_store/ui/product/comment/insert/insert_comment_dialog.dart';
-import 'package:nike_store/ui/widgets/imageService.dart';
+import 'package:nike_store/ui/widgets/image_service.dart';
 
 import '../../data/product.dart';
 
@@ -24,7 +24,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  StreamSubscription<ProductState>? subscription = null;
+  StreamSubscription<ProductState>? subscription;
 
   @override
   void dispose() {
@@ -41,7 +41,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           final productBloc = ProductBloc(cartRepository);
           subscription = productBloc.stream.listen((state) {
             if (state is ProductAddToCartSuccessState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('با موفقیت به سبد خرید شما اضافه شد')));
             } else if (state is ProductAddToCartErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -61,17 +61,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           .add(CartAddButtonClickEvent(widget.product.id));
                     },
                     label: (state is ProductAddtoCartButtonLoadingState)
-                        ? CupertinoActivityIndicator(
+                        ? const CupertinoActivityIndicator(
                             color: Colors.white,
                           )
-                        : Text('افزودن به سبد خرید'));
+                        : const Text('افزودن به سبد خرید'));
               },
             ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           body: CustomScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(
                 expandedHeight: MediaQuery.of(context).size.width * 0.8,
@@ -80,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     borderRadius: BorderRadius.circular(0)),
                 foregroundColor: LightThemeColors.primaryTextColor,
                 actions: [
-                  IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.heart))
+                  IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.heart))
                 ],
               ),
               SliverToBoxAdapter(
@@ -92,14 +92,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Expanded(
                             child: Text(
                           widget.product.title,
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         )),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               widget.product.previousPrice.withPriceLabel,
-                              style: Theme.of(context).textTheme.caption!.apply(
+                              style: Theme.of(context).textTheme.bodySmall!.apply(
                                   decoration: TextDecoration.lineThrough),
                             ),
                             Text(widget.product.price.withPriceLabel),
@@ -107,23 +107,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
-                    Text(
+                    const Text(
                         'توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول توضیحات محصول'),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'نظرات کاربران',
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                           TextButton(
                               onPressed: () {
                                 showModalBottomSheet(
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(32),
                                           topLeft: Radius.circular(32))),
@@ -138,7 +138,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   },
                                 );
                               },
-                              child: Text('ثبت نظر'))
+                              child: const Text('ثبت نظر'))
                         ]),
                   ]),
                 ),

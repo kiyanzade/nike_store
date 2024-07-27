@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:nike_store/data/favorite_manager.dart';
 import 'package:nike_store/data/product.dart';
 import 'package:nike_store/ui/home/home.dart';
 import 'package:nike_store/ui/product/details.dart';
-import 'package:nike_store/ui/widgets/imageService.dart';
+import 'package:nike_store/ui/widgets/image_service.dart';
 
 class FavoriteListScreen extends StatelessWidget {
   const FavoriteListScreen({super.key});
@@ -59,7 +58,7 @@ class FavoriteListScreen extends StatelessWidget {
                             ),
                             Text(
                               product.previousPrice.withPriceLabel,
-                              style: Theme.of(context).textTheme.caption!.apply(
+                              style: Theme.of(context).textTheme.bodySmall!.apply(
                                   decoration: TextDecoration.lineThrough),
                             ),
                             Text(product.price.withPriceLabel),

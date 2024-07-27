@@ -11,7 +11,7 @@ class CommentListLoadingState extends CommentListState {}
 
 class CommentListSuccessState extends CommentListState {
   final List<Comment> comments;
-  CommentListSuccessState(this.comments);
+  const CommentListSuccessState(this.comments);
 
   @override
   List<Object> get props => [comments];
@@ -20,7 +20,7 @@ class CommentListSuccessState extends CommentListState {
 class CommentListErrorState extends CommentListState {
   final AppException exception;
 
-  CommentListErrorState(this.exception);
+  const CommentListErrorState(this.exception);
 
   @override
   List<Object> get props => [exception];
